@@ -1,0 +1,72 @@
+CREATE TABLE Artist (
+    nconst VARCHAR(20) PRIMARY KEY,
+    primaryName TEXT,
+    birthYear INT,
+    deathYear INT,
+    primaryProfession TEXT,
+    knownForTitles TEXT
+);
+
+CREATE TABLE Artist_Profession (
+    ProfID SERIAL PRIMARY KEY,
+    nconst VARCHAR(20) REFERENCES Artist(nconst) ON DELETE CASCADE,
+    Label VARCHAR(255)
+);
+
+CREATE TABLE Artist_Known (
+    KnownID SERIAL PRIMARY KEY,
+    nconst VARCHAR(20) REFERENCES Artist(nconst) ON DELETE CASCADE,
+    tconst VARCHAR(20)
+);
+
+CREATE TABLE Title (
+    tconst VARCHAR(20) PRIMARY KEY,
+    titleType VARCHAR(50),
+    primaryTitle TEXT,
+    originalTitle TEXT,
+    isAdult BOOLEAN DEFAULT FALSE,
+    startYear INT,
+    endYear INT,
+    runtimeMinutes INT
+);
+
+CREATE TABLE Title_Akas (
+    akaID SERIAL PRIMARY KEY,
+    titleID VARCHAR(20) REFERENCES Title(tconst) ON DELETE CASCADE,
+    ordering INT,
+    title TEXT,
+    region TEXT,
+    language TEXT,
+    types VARCHAR(100),
+    attributes VARCHAR(255),
+    isOriginalTitle BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE Principals (
+    principalID SERIAL PRIMARY KEY,
+    tconst VARCHAR(20) REFERENCES Title(tconst) ON DELETE CASCADE,
+    nconst VARCHAR(20) REFERENCES Artist(nconst) ON DELETE CASCADE,
+    ordering INT,
+    category VARCHAR(100),
+    job TEXT,
+    characters TEXT
+);
+
+CREATE TABLE Rating (
+    tconst VARCHAR(20) PRIMARY KEY REFERENCES Title(tconst) ON DELETE CASCADE,
+    averageRating DECIMAL(3, 1) CHECK (averageRating >= 1.0 AND averageRating <= 10.0),
+    numVotes INT
+);
+
+CREATE TABLE Genre (
+    GenreID SERIAL PRIMARY KEY,
+    genreName VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE Title_Genre (
+    tconst VARCHAR(20),
+    GenreID INT,
+    PRIMARY KEY (tconst, GenreID),
+    FOREIGN KEY (tconst) REFERENCES Title(tconst) ON DELETE CASCADE,
+    FOREIGN KEY (GenreID) REFERENCES Genre(GenreID) ON DELETE CASCADE
+);
