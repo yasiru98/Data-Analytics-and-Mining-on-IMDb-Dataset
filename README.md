@@ -1,28 +1,57 @@
-# Data-Analytics-and-Mining-on-IMDb-Dataset
-This project leverages Big Data techniques to analyze the IMDb dataset, uncovering patterns in movie genres, artist professions, and audience ratings. It combines relational and document-oriented database models, implements data cleaning and transformation pipelines, and applies frequent itemset mining and association rule mining.
-Key Features:
+# IMDb Data Analytics and Mining Project  
 
-    Hybrid Database Design:
-        PostgreSQL for relational modeling with advanced indexing for optimized query performance.
-        MongoDB for schema-less, hierarchical storage with embedded data for efficient read-heavy operations.
+This repository contains the complete implementation of a **Big Data project** focused on analyzing the IMDb dataset containing over 50 million records. The project integrates relational and document-oriented databases, data cleaning pipelines, and advanced data mining techniques to uncover meaningful insights into genres, artist professions, and audience ratings.
 
-    Data Cleaning:
-    Python and Pandas pipelines to standardize, transform, and handle multi-valued fields, ensuring high-quality data for analysis.
+## Features
 
-    Frequent Itemset and Association Rule Mining:
-    Applied efficient_apriori and MLxtend to uncover frequent co-occurrences of genres and professions, and generate actionable rules like "Action → Adventure."
+### 1. Hybrid Database Design
+- **PostgreSQL**: Utilized for relational data modeling with advanced indexing strategies to optimize query performance.
+- **MongoDB**: Implemented for hierarchical, schema-less storage with embedded data structures for efficient read-heavy operations.
 
-    Performance Optimization:
-    Indexed relational queries achieving significant speed improvements and reduced redundancy in MongoDB using nested structures.
+### 2. Data Cleaning
+- Cleaned IMDb datasets using **Python** and **Pandas**:
+  - Standardized missing values (`\N` replaced with `None`).
+  - Transformed multi-valued fields (e.g., genres, professions) into analyzable formats.
+  - Handled inconsistencies and duplicates to ensure data quality.
 
-    Visualization:
-    Insights visualized using Matplotlib and Seaborn, highlighting trends like popular genre pairings and frequent profession collaborations.
+### 3. Data Mining
+- **Frequent Itemset Mining**:
+  - Used the **efficient_apriori** library to identify frequent combinations of genres and professions.
+  - Example: Action and Adventure frequently co-occur in movies.
+- **Association Rule Mining**:
+  - Implemented using **MLxtend** to generate rules like:
+    - **"Action → Adventure"**
+    - **"Actor → Director"**
 
-Tools Used:
+### 4. Query Performance Optimization
+- Indexed SQL queries in **PostgreSQL** for up to **55% faster execution**.
+- Embedded structures in **MongoDB** improved read-heavy operations by **40%** compared to relational joins.
 
-    Databases: PostgreSQL, MongoDB
-    Programming: Python, Pandas
-    Mining Libraries: efficient_apriori, MLxtend
-    Visualization: Matplotlib, Seaborn
+### 5. Visualization
+- Created insightful visualizations using **Matplotlib** and **Seaborn**:
+  - Popular genre pairings (e.g., Action and Adventure).
+  - Frequent profession collaborations (e.g., Actor and Director).
 
-This project demonstrates advanced database management, data cleaning, and mining techniques, providing actionable insights for recommendation systems, market analysis, and trend prediction in the film industry.
+---
+
+## Project Workflow
+### Phase 1: Relational Model
+- Designed an **ER Diagram** and normalized schema for the IMDb dataset.
+- Created SQL tables with primary and foreign key constraints.
+
+### Phase 2: Document-Oriented Model
+- Migrated data to **MongoDB**, embedding nested structures (e.g., localizations and artist contributions).
+- Compared relational joins with MongoDB's schema flexibility.
+
+### Phase 3: Data Mining and Analysis
+- Applied **frequent itemset mining** and **association rule mining** to find hidden patterns in the dataset.
+- Cleaned and prepared data for mining using custom Python pipelines.
+
+---
+
+## How to Run the Project
+### Prerequisites
+- Install **PostgreSQL** and **MongoDB**.
+- Install required Python libraries:  
+  ```bash
+  pip install pandas psycopg2 pymongo efficient-apriori mlxtend matplotlib seaborn
